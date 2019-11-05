@@ -27,6 +27,9 @@ namespace Tmx_Converter_Tool
                     var path = fileDialog.FileName;
                     map = new TmxMap(path);
 
+                    // clear listview
+                    lsvObject.Clear();
+
                     if (path.Length > 52) lblFileName.Text = "\\\\..." + path.Substring(path.Length - 52, 52);
                     else lblFileName.Text = path;
 
@@ -67,22 +70,28 @@ namespace Tmx_Converter_Tool
 
         }
 
-
-        private void btnExport_Click(object sender, EventArgs e)
+        private void BtnExport_Click(object sender, EventArgs e)
         {
             List<string> lines = new List<string>();
             if (map == null)
             {
-                MessageBox.Show(" --=== Chưa load dc file tmx mà ===--", "-__-");
+                MessageBox.Show(" --=== Chưa load dc file tmx mà ===--", " -__- ");
                 return;
             }
+
+            // Mac dinh dong dau tien :
+            //
+            // idTexture - mapwidth - mapheight - tilewidth - tileheigth
+            //
+
+            lines.Add(String.Format("{0}    {1}     {2}     {3}     {4}", idTexture.ToString(), mapWidth.ToString(), mapHeight.ToString(), tileWidth.ToString(), tileHeight.ToString()));
 
             var listObjectGroups = map.ObjectGroups;
             foreach (var group in listObjectGroups)
             {
                 foreach (var obj in group.Objects)
                 {
-                    lines.Add(String.Format("{0}    {1}     {2}     {3}", obj.Id, obj.Name, obj.X.ToString(), obj.Y.ToString()));
+                    lines.Add(String.Format("{0}    {1}     {2}     {3}", group.Name, obj.Name, Math.Round(obj.X).ToString(), Math.Round(obj.Y).ToString()));
                 }
             }
             string pathFile;
@@ -97,13 +106,11 @@ namespace Tmx_Converter_Tool
 
         }
 
-        private void lsvObject_SelectedIndexChanged(object sender, EventArgs e)
+        private void LsvObject_SelectedIndexChanged(object sender, EventArgs e)
         {
             var objSelected = lsvObject.FocusedItem.Text;
 
             var listObjectGroups = map.ObjectGroups;
-
-
 
             foreach (var group in listObjectGroups)
             {
@@ -111,7 +118,7 @@ namespace Tmx_Converter_Tool
                 if (data != null)
                 {
                     lblObjID_Selected.Text = data.Name;
-                    lblObjName_Selected.Text = data.Name;
+                    lblObjName_Selected.Text = group.Name;
                     lblObjX_Selected.Text = Math.Floor(data.X).ToString();
                     lblObjY_Selected.Text = Math.Floor(data.Y).ToString();
                     return;

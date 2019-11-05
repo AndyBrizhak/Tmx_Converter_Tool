@@ -199,12 +199,13 @@
             // lsvObject
             // 
             this.lsvObject.HideSelection = false;
-            this.lsvObject.Location = new System.Drawing.Point(32, 254);
+            this.lsvObject.Location = new System.Drawing.Point(32, 263);
             this.lsvObject.Name = "lsvObject";
             this.lsvObject.Size = new System.Drawing.Size(539, 147);
             this.lsvObject.TabIndex = 14;
             this.lsvObject.UseCompatibleStateImageBehavior = false;
-            this.lsvObject.SelectedIndexChanged += new System.EventHandler(this.lsvObject_SelectedIndexChanged);
+            this.lsvObject.View = System.Windows.Forms.View.SmallIcon;
+            this.lsvObject.SelectedIndexChanged += new System.EventHandler(this.LsvObject_SelectedIndexChanged);
             // 
             // groupBox1
             // 
@@ -265,7 +266,7 @@
             // lblObjName_Selected
             // 
             this.lblObjName_Selected.AutoSize = true;
-            this.lblObjName_Selected.Location = new System.Drawing.Point(65, 59);
+            this.lblObjName_Selected.Location = new System.Drawing.Point(130, 29);
             this.lblObjName_Selected.Name = "lblObjName_Selected";
             this.lblObjName_Selected.Size = new System.Drawing.Size(46, 20);
             this.lblObjName_Selected.TabIndex = 18;
@@ -274,7 +275,7 @@
             // lblObjID_Selected
             // 
             this.lblObjID_Selected.AutoSize = true;
-            this.lblObjID_Selected.Location = new System.Drawing.Point(47, 29);
+            this.lblObjID_Selected.Location = new System.Drawing.Point(71, 59);
             this.lblObjID_Selected.Name = "lblObjID_Selected";
             this.lblObjID_Selected.Size = new System.Drawing.Size(46, 20);
             this.lblObjID_Selected.TabIndex = 17;
@@ -292,11 +293,12 @@
             // label10
             // 
             this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label10.Location = new System.Drawing.Point(6, 29);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(34, 20);
+            this.label10.Size = new System.Drawing.Size(118, 20);
             this.label10.TabIndex = 15;
-            this.label10.Text = "ID :";
+            this.label10.Text = "Game Obj ID:";
             // 
             // label9
             // 
@@ -326,7 +328,7 @@
             this.btnExport.TabIndex = 17;
             this.btnExport.Text = "3Xp0rt";
             this.btnExport.UseVisualStyleBackColor = false;
-            this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
+            this.btnExport.Click += new System.EventHandler(this.BtnExport_Click);
             // 
             // Main
             // 
