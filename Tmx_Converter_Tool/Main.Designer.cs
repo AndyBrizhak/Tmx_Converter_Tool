@@ -45,24 +45,38 @@
             this.lblTileHeight = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.lsvObject = new System.Windows.Forms.ListView();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.lblObjY_Selected = new System.Windows.Forms.Label();
+            this.lblObjX_Selected = new System.Windows.Forms.Label();
+            this.lblObjName_Selected = new System.Windows.Forms.Label();
+            this.lblObjID_Selected = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.btnExport = new System.Windows.Forms.Button();
+            this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
+            this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnImport
             // 
             this.btnImport.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.btnImport.Font = new System.Drawing.Font("Segoe Print", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnImport.Location = new System.Drawing.Point(352, 447);
+            this.btnImport.Location = new System.Drawing.Point(401, 436);
             this.btnImport.Name = "btnImport";
-            this.btnImport.Size = new System.Drawing.Size(219, 54);
+            this.btnImport.Size = new System.Drawing.Size(170, 54);
             this.btnImport.TabIndex = 0;
-            this.btnImport.Text = "( . )( . )";
+            this.btnImport.Text = "iMp0rT";
             this.btnImport.UseVisualStyleBackColor = false;
             this.btnImport.Click += new System.EventHandler(this.BtnImport_Click);
             // 
             // lblFileName
             // 
             this.lblFileName.AutoSize = true;
-            this.lblFileName.Location = new System.Drawing.Point(127, 23);
+            this.lblFileName.Location = new System.Drawing.Point(99, 32);
             this.lblFileName.Name = "lblFileName";
             this.lblFileName.Size = new System.Drawing.Size(42, 20);
             this.lblFileName.TabIndex = 1;
@@ -75,7 +89,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(34, 23);
+            this.label1.Location = new System.Drawing.Point(6, 32);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(87, 20);
             this.label1.TabIndex = 2;
@@ -84,7 +98,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(34, 109);
+            this.label2.Location = new System.Drawing.Point(6, 118);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(93, 20);
             this.label2.TabIndex = 3;
@@ -93,7 +107,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(301, 109);
+            this.label3.Location = new System.Drawing.Point(273, 118);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(99, 20);
             this.label3.TabIndex = 4;
@@ -102,7 +116,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(34, 151);
+            this.label4.Location = new System.Drawing.Point(6, 160);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(86, 20);
             this.label4.TabIndex = 5;
@@ -111,7 +125,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(301, 151);
+            this.label5.Location = new System.Drawing.Point(273, 160);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(92, 20);
             this.label5.TabIndex = 6;
@@ -121,7 +135,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(34, 67);
+            this.label6.Location = new System.Drawing.Point(6, 76);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(145, 20);
             this.label6.TabIndex = 7;
@@ -130,7 +144,7 @@
             // lblMapTexture
             // 
             this.lblMapTexture.AutoSize = true;
-            this.lblMapTexture.Location = new System.Drawing.Point(201, 67);
+            this.lblMapTexture.Location = new System.Drawing.Point(173, 76);
             this.lblMapTexture.Name = "lblMapTexture";
             this.lblMapTexture.Size = new System.Drawing.Size(46, 20);
             this.lblMapTexture.TabIndex = 8;
@@ -139,7 +153,7 @@
             // lblTileWidth
             // 
             this.lblTileWidth.AutoSize = true;
-            this.lblTileWidth.Location = new System.Drawing.Point(146, 151);
+            this.lblTileWidth.Location = new System.Drawing.Point(118, 160);
             this.lblTileWidth.Name = "lblTileWidth";
             this.lblTileWidth.Size = new System.Drawing.Size(46, 20);
             this.lblTileWidth.TabIndex = 9;
@@ -148,7 +162,7 @@
             // lblWidth
             // 
             this.lblWidth.AutoSize = true;
-            this.lblWidth.Location = new System.Drawing.Point(146, 109);
+            this.lblWidth.Location = new System.Drawing.Point(118, 118);
             this.lblWidth.Name = "lblWidth";
             this.lblWidth.Size = new System.Drawing.Size(46, 20);
             this.lblWidth.TabIndex = 10;
@@ -157,7 +171,7 @@
             // lblHeight
             // 
             this.lblHeight.AutoSize = true;
-            this.lblHeight.Location = new System.Drawing.Point(419, 109);
+            this.lblHeight.Location = new System.Drawing.Point(391, 118);
             this.lblHeight.Name = "lblHeight";
             this.lblHeight.Size = new System.Drawing.Size(46, 20);
             this.lblHeight.TabIndex = 11;
@@ -166,7 +180,7 @@
             // lblTileHeight
             // 
             this.lblTileHeight.AutoSize = true;
-            this.lblTileHeight.Location = new System.Drawing.Point(419, 151);
+            this.lblTileHeight.Location = new System.Drawing.Point(391, 160);
             this.lblTileHeight.Name = "lblTileHeight";
             this.lblTileHeight.Size = new System.Drawing.Size(46, 20);
             this.lblTileHeight.TabIndex = 12;
@@ -176,7 +190,7 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(34, 192);
+            this.label7.Location = new System.Drawing.Point(38, 231);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(105, 20);
             this.label7.TabIndex = 13;
@@ -185,39 +199,157 @@
             // lsvObject
             // 
             this.lsvObject.HideSelection = false;
-            this.lsvObject.Location = new System.Drawing.Point(38, 235);
+            this.lsvObject.Location = new System.Drawing.Point(32, 254);
             this.lsvObject.Name = "lsvObject";
-            this.lsvObject.Size = new System.Drawing.Size(533, 195);
+            this.lsvObject.Size = new System.Drawing.Size(539, 147);
             this.lsvObject.TabIndex = 14;
             this.lsvObject.UseCompatibleStateImageBehavior = false;
+            this.lsvObject.SelectedIndexChanged += new System.EventHandler(this.lsvObject_SelectedIndexChanged);
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.label1);
+            this.groupBox1.Controls.Add(this.label2);
+            this.groupBox1.Controls.Add(this.label3);
+            this.groupBox1.Controls.Add(this.lblTileHeight);
+            this.groupBox1.Controls.Add(this.lblFileName);
+            this.groupBox1.Controls.Add(this.lblHeight);
+            this.groupBox1.Controls.Add(this.label4);
+            this.groupBox1.Controls.Add(this.lblWidth);
+            this.groupBox1.Controls.Add(this.label5);
+            this.groupBox1.Controls.Add(this.lblTileWidth);
+            this.groupBox1.Controls.Add(this.label6);
+            this.groupBox1.Controls.Add(this.lblMapTexture);
+            this.groupBox1.Location = new System.Drawing.Point(32, 28);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(539, 200);
+            this.groupBox1.TabIndex = 15;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Information";
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.lblObjY_Selected);
+            this.groupBox2.Controls.Add(this.lblObjX_Selected);
+            this.groupBox2.Controls.Add(this.lblObjName_Selected);
+            this.groupBox2.Controls.Add(this.lblObjID_Selected);
+            this.groupBox2.Controls.Add(this.label11);
+            this.groupBox2.Controls.Add(this.label10);
+            this.groupBox2.Controls.Add(this.label9);
+            this.groupBox2.Controls.Add(this.label8);
+            this.groupBox2.Location = new System.Drawing.Point(32, 426);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(309, 133);
+            this.groupBox2.TabIndex = 16;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Object Selected";
+            // 
+            // lblObjY_Selected
+            // 
+            this.lblObjY_Selected.AutoSize = true;
+            this.lblObjY_Selected.Location = new System.Drawing.Point(214, 88);
+            this.lblObjY_Selected.Name = "lblObjY_Selected";
+            this.lblObjY_Selected.Size = new System.Drawing.Size(46, 20);
+            this.lblObjY_Selected.TabIndex = 20;
+            this.lblObjY_Selected.Text = " XXX";
+            // 
+            // lblObjX_Selected
+            // 
+            this.lblObjX_Selected.AutoSize = true;
+            this.lblObjX_Selected.Location = new System.Drawing.Point(47, 88);
+            this.lblObjX_Selected.Name = "lblObjX_Selected";
+            this.lblObjX_Selected.Size = new System.Drawing.Size(46, 20);
+            this.lblObjX_Selected.TabIndex = 19;
+            this.lblObjX_Selected.Text = " XXX";
+            // 
+            // lblObjName_Selected
+            // 
+            this.lblObjName_Selected.AutoSize = true;
+            this.lblObjName_Selected.Location = new System.Drawing.Point(65, 59);
+            this.lblObjName_Selected.Name = "lblObjName_Selected";
+            this.lblObjName_Selected.Size = new System.Drawing.Size(46, 20);
+            this.lblObjName_Selected.TabIndex = 18;
+            this.lblObjName_Selected.Text = " XXX";
+            // 
+            // lblObjID_Selected
+            // 
+            this.lblObjID_Selected.AutoSize = true;
+            this.lblObjID_Selected.Location = new System.Drawing.Point(47, 29);
+            this.lblObjID_Selected.Name = "lblObjID_Selected";
+            this.lblObjID_Selected.Size = new System.Drawing.Size(46, 20);
+            this.lblObjID_Selected.TabIndex = 17;
+            this.lblObjID_Selected.Text = " XXX";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(6, 59);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(59, 20);
+            this.label11.TabIndex = 16;
+            this.label11.Text = "Name :";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(6, 29);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(34, 20);
+            this.label10.TabIndex = 15;
+            this.label10.Text = "ID :";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(148, 88);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(28, 20);
+            this.label9.TabIndex = 14;
+            this.label9.Text = "Y :";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(6, 88);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(28, 20);
+            this.label8.TabIndex = 13;
+            this.label8.Text = "X :";
+            // 
+            // btnExport
+            // 
+            this.btnExport.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.btnExport.Font = new System.Drawing.Font("Segoe Print", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnExport.Location = new System.Drawing.Point(401, 505);
+            this.btnExport.Name = "btnExport";
+            this.btnExport.Size = new System.Drawing.Size(170, 54);
+            this.btnExport.TabIndex = 17;
+            this.btnExport.Text = "3Xp0rt";
+            this.btnExport.UseVisualStyleBackColor = false;
+            this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
             // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Honeydew;
-            this.ClientSize = new System.Drawing.Size(595, 539);
+            this.ClientSize = new System.Drawing.Size(600, 590);
+            this.Controls.Add(this.btnExport);
+            this.Controls.Add(this.groupBox2);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.lsvObject);
             this.Controls.Add(this.label7);
-            this.Controls.Add(this.lblTileHeight);
-            this.Controls.Add(this.lblHeight);
-            this.Controls.Add(this.lblWidth);
-            this.Controls.Add(this.lblTileWidth);
-            this.Controls.Add(this.lblMapTexture);
-            this.Controls.Add(this.label6);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.lblFileName);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.btnImport);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MaximumSize = new System.Drawing.Size(617, 595);
-            this.MinimumSize = new System.Drawing.Size(617, 595);
+            this.MaximumSize = new System.Drawing.Size(622, 646);
+            this.MinimumSize = new System.Drawing.Size(622, 646);
             this.Name = "Main";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Tmx Converter Tool By maslhiro (\")>";
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -241,5 +373,17 @@
         private System.Windows.Forms.Label lblTileHeight;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.ListView lsvObject;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.Label lblObjID_Selected;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label lblObjY_Selected;
+        private System.Windows.Forms.Label lblObjX_Selected;
+        private System.Windows.Forms.Label lblObjName_Selected;
+        private System.Windows.Forms.Button btnExport;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog;
     }
 }

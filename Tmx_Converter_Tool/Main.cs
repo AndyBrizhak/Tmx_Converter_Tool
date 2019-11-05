@@ -1,11 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using TiledSharp;
 
@@ -15,12 +10,11 @@ namespace Tmx_Converter_Tool
     {
         private string idTexture;
         private int mapWidth, mapHeight, tileWidth, tileHeight;
+        private TmxMap map;
 
         public Main()
         {
             InitializeComponent();
-
-            //lsvObject.View = View.Details;
         }
 
         private void BtnImport_Click(object sender, EventArgs e)
@@ -31,7 +25,7 @@ namespace Tmx_Converter_Tool
                 if (result == DialogResult.OK) // Test result.
                 {
                     var path = fileDialog.FileName;
-                    var map = new TmxMap(path);
+                    map = new TmxMap(path);
 
                     if (path.Length > 52) lblFileName.Text = "\\\\..." + path.Substring(path.Length - 52, 52);
                     else lblFileName.Text = path;
@@ -60,7 +54,6 @@ namespace Tmx_Converter_Tool
                         foreach (var obj in group.Objects)
                         {
                             lsvObject.Items.Add(obj.Name);
-
                         }
                     }
 
@@ -73,5 +66,60 @@ namespace Tmx_Converter_Tool
             }
 
         }
+
+
+        private void btnExport_Click(object sender, EventArgs e)
+        {
+            List<string> lines = new List<string>();
+            if (map == null)
+            {
+                MessageBox.Show(" --=== Chưa load dc file tmx mà ===--", "-__-");
+                return;
+            }
+
+            var listObjectGroups = map.ObjectGroups;
+            foreach (var group in listObjectGroups)
+            {
+                foreach (var obj in group.Objects)
+                {
+                    lines.Add(String.Format("{0}    {1}     {2}     {3}", obj.Id, obj.Name, obj.X.ToString(), obj.Y.ToString()));
+                }
+            }
+            string pathFile;
+            saveFileDialog.Title = "Éc éc";
+            saveFileDialog.Filter = "Text files (*.txt)|*.txt";
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                pathFile = saveFileDialog.FileName;
+                System.IO.File.WriteAllLines(pathFile, lines);
+                MessageBox.Show("Done >.<", "Done >.<");
+            }
+
+        }
+
+        private void lsvObject_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var objSelected = lsvObject.FocusedItem.Text;
+
+            var listObjectGroups = map.ObjectGroups;
+
+
+
+            foreach (var group in listObjectGroups)
+            {
+                var data = group.Objects.FirstOrDefault(m => m.Name == objSelected);
+                if (data != null)
+                {
+                    lblObjID_Selected.Text = data.Name;
+                    lblObjName_Selected.Text = data.Name;
+                    lblObjX_Selected.Text = Math.Floor(data.X).ToString();
+                    lblObjY_Selected.Text = Math.Floor(data.Y).ToString();
+                    return;
+                }
+            }
+
+
+        }
+
     }
 }
