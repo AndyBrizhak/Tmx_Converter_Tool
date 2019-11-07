@@ -22,7 +22,7 @@ namespace Tmx_Converter_Tool
             try
             {
                 DialogResult result = fileDialog.ShowDialog();
-                if (result == DialogResult.OK) // Test result.
+                if (result == DialogResult.OK)
                 {
                     var path = fileDialog.FileName;
                     map = new TmxMap(path);
@@ -30,7 +30,7 @@ namespace Tmx_Converter_Tool
                     // clear listview
                     lsvObject.Clear();
 
-                    if (path.Length > 52) lblFileName.Text = "\\\\..." + path.Substring(path.Length - 52, 52);
+                    if (path.Length > 40) lblFileName.Text = "\\\\..." + path.Substring(path.Length - 40, 40);
                     else lblFileName.Text = path;
 
                     // map chi co 1 tileset duy nhat nen ko duyet het tileset lam gi :)))
@@ -84,14 +84,17 @@ namespace Tmx_Converter_Tool
             // idTexture - mapwidth - mapheight - tilewidth - tileheigth
             //
 
-            lines.Add(String.Format("{0}    {1}     {2}     {3}     {4}", idTexture.ToString(), mapWidth.ToString(), mapHeight.ToString(), tileWidth.ToString(), tileHeight.ToString()));
+            lines.Add(String.Format("{0}\t{1}\t{2}\t{3}\t{4}", idTexture.ToString(), mapWidth.ToString(), mapHeight.ToString(), tileWidth.ToString(), tileHeight.ToString()));
 
             var listObjectGroups = map.ObjectGroups;
             foreach (var group in listObjectGroups)
             {
                 foreach (var obj in group.Objects)
                 {
-                    lines.Add(String.Format("{0}    {1}     {2}     {3}", group.Name, obj.Name, Math.Round(obj.X).ToString(), Math.Round(obj.Y).ToString()));
+                    //
+                    // idTypeObj - idObj - x - y
+                    //
+                    lines.Add(String.Format("{0}\t{1}\t{2}\t{3}", group.Name, obj.Name, Math.Round(obj.X).ToString(), Math.Round(obj.Y).ToString()));
                 }
             }
             string pathFile;
