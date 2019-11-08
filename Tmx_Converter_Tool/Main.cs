@@ -107,7 +107,7 @@ namespace Tmx_Converter_Tool
                         //
                         // idTypeObj - idObj - x - y
                         //
-                        lines.Add(String.Format("{0}\t{1}\t{2}\t{3}", group.Name, obj.Name, Math.Round(obj.X).ToString(), Math.Round(obj.Y).ToString()));
+                        lines.Add(String.Format("{0}\t{1}\t{2}\t{3}\t{4}\t{5}", group.Name, obj.Name, Math.Round(obj.X).ToString(), Math.Round(obj.Y).ToString(), "0", "0"));
                     }
                 }
             }
