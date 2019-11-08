@@ -91,10 +91,24 @@ namespace Tmx_Converter_Tool
             {
                 foreach (var obj in group.Objects)
                 {
-                    //
-                    // idTypeObj - idObj - x - y
-                    //
-                    lines.Add(String.Format("{0}\t{1}\t{2}\t{3}", group.Name, obj.Name, Math.Round(obj.X).ToString(), Math.Round(obj.Y).ToString()));
+                    // Kiem tra typeObj 
+                    // Mac dinh typeObj >= 4500 && < 5000 
+                    int typeObj = Convert.ToInt32(group.Name);
+                    if (typeObj >= 4500 && typeObj < 5000)
+                    {
+                        // Them 2 truong w, h =_=
+                        //
+                        // idTypeObj - idObj - x - y - w - h
+                        //
+                        lines.Add(String.Format("{0}\t{1}\t{2}\t{3}\t{4}\t{5}", group.Name, obj.Name, Math.Round(obj.X).ToString(), Math.Round(obj.Y).ToString(), Math.Round(obj.Width).ToString(), Math.Round(obj.Height).ToString()));
+                    }
+                    else
+                    {
+                        //
+                        // idTypeObj - idObj - x - y
+                        //
+                        lines.Add(String.Format("{0}\t{1}\t{2}\t{3}", group.Name, obj.Name, Math.Round(obj.X).ToString(), Math.Round(obj.Y).ToString()));
+                    }
                 }
             }
             string pathFile;

@@ -296,9 +296,9 @@
             this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label10.Location = new System.Drawing.Point(6, 29);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(118, 20);
+            this.label10.Size = new System.Drawing.Size(108, 20);
             this.label10.TabIndex = 15;
-            this.label10.Text = "Game Obj ID:";
+            this.label10.Text = "Type Obj ID:";
             // 
             // label9
             // 
