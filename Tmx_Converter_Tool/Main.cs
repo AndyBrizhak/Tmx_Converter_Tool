@@ -100,7 +100,13 @@ namespace Tmx_Converter_Tool
                         //
                         // idTypeObj - idObj - x - y - w - h
                         //
-                        lines.Add(String.Format("{0}\t{1}\t{2}\t{3}\t{4}\t{5}", group.Name, obj.Name, Math.Round(obj.X).ToString(), Math.Round(obj.Y).ToString(), Math.Round(obj.Width).ToString(), Math.Round(obj.Height).ToString()));
+                        double left = Math.Round(obj.X);
+                        double top = Math.Round(obj.Y);
+                        double right = Math.Round(obj.X + obj.Width);
+                        double bottom = Math.Round(obj.Y + obj.Height);
+
+
+                        lines.Add(String.Format("{0}\t{1}\t{2}\t{3}\t{4}\t{5}", group.Name, obj.Name, left.ToString(), top.ToString(), right.ToString(), bottom.ToString()));
                     }
                     else
                     {

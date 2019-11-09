@@ -8,6 +8,6 @@ File txt sẽ dc format theo định dạng :
 
 - Những dòng tiếp theo là info các Obj trong map :
 
-- - Đối với các obj tĩnh `( id >= 4500 && < 5000 )` như land, pillar,.. :  `idTypeObj - idObj - x - y - w - h`
+- - Đối với các obj tĩnh `( id >= 4500 && < 5000 )` như land, pillar,.. :  `idTypeObj - idObj - left - top - right - bottom`
  
 - - Đối với các obj game bth `( id >= 4000 && < 4500 )` như apple, enermy,.. : `idTypeObj - idObj - x - y - 0 - 0`
