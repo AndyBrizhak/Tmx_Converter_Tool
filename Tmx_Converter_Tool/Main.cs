@@ -83,10 +83,20 @@ namespace Tmx_Converter_Tool
             //
             // idTexture - mapwidth - mapheight - tilewidth - tileheigth
             //
-
-            lines.Add(String.Format("{0}\t{1}\t{2}\t{3}\t{4}", idTexture.ToString(), mapWidth.ToString(), mapHeight.ToString(), tileWidth.ToString(), tileHeight.ToString()));
-
             var listObjectGroups = map.ObjectGroups;
+
+            int totalObject = 0;
+            foreach (var group in listObjectGroups)
+            {
+                foreach (var obj in group.Objects)
+                {
+                    totalObject += 1;
+                }
+            }
+
+            lines.Add(String.Format("{0}\t{1}\t{2}\t{3}\t{4}\t{5}", idTexture.ToString(), mapWidth.ToString(), mapHeight.ToString(), tileWidth.ToString(), tileHeight.ToString(), (totalObject - 1).ToString()));
+
+
             foreach (var group in listObjectGroups)
             {
                 foreach (var obj in group.Objects)
@@ -94,7 +104,11 @@ namespace Tmx_Converter_Tool
                     // Kiem tra typeObj 
                     // Mac dinh typeObj >= 4500 && < 5000 
                     int typeObj = Convert.ToInt32(group.Name);
-                    if (typeObj >= 4500 && typeObj < 5000)
+                    if (typeObj == 6000)
+                    {
+                        lines.Add(String.Format("{0}\t{1}", Math.Round(obj.X).ToString(), Math.Round(obj.Y).ToString()));
+                    }
+                    else if (typeObj >= 4500 && typeObj < 5000)
                     {
                         // Them 2 truong w, h =_=
                         //
