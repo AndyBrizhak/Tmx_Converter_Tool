@@ -59,7 +59,6 @@ namespace Tmx_Converter_Tool
                             lsvObject.Items.Add(obj.Name);
                         }
                     }
-
                 }
 
             }
@@ -72,30 +71,35 @@ namespace Tmx_Converter_Tool
 
         private void BtnExport_Click(object sender, EventArgs e)
         {
-            List<string> lines = new List<string>();
             if (map == null)
             {
                 MessageBox.Show(" --=== Chưa load dc file tmx mà ===--", " -__- ");
                 return;
             }
 
-            // Mac dinh dong dau tien :
-            //
-            // idTexture - mapwidth - mapheight - tilewidth - tileheigth
-            //
-            var listObjectGroups = map.ObjectGroups;
+            List<string> linesObj = new List<string>();
+            List<string> linesTile = new List<string>();
 
-            int totalObject = 0;
-            foreach (var group in listObjectGroups)
+            #region TILE txt 
+            // Dong dau la idTexture
+            linesTile.Add(String.Format("{0}", idTexture.ToString()));
+
+            int idUnit = 1;
+
+            // Duyet
+            for (int y = 0; y < mapHeight; y += tileHeight)
             {
-                foreach (var obj in group.Objects)
+                for (int x = 0; x < mapWidth; x += tileWidth)
                 {
-                    totalObject += 1;
+                    // id 
+                    linesTile.Add(String.Format("{0}\t{1}\t{2}\t{3}\t{4}", idUnit, x, y, x + tileWidth, y + tileHeight));
+                    idUnit += 1;
                 }
             }
+            #endregion
 
-            lines.Add(String.Format("{0}\t{1}\t{2}\t{3}\t{4}\t{5}", idTexture.ToString(), mapWidth.ToString(), mapHeight.ToString(), tileWidth.ToString(), tileHeight.ToString(), (totalObject - 1).ToString()));
-
+            #region OBJ txt
+            var listObjectGroups = map.ObjectGroups;
 
             foreach (var group in listObjectGroups)
             {
@@ -104,11 +108,8 @@ namespace Tmx_Converter_Tool
                     // Kiem tra typeObj 
                     // Mac dinh typeObj >= 4500 && < 5000 
                     int typeObj = Convert.ToInt32(group.Name);
-                    if (typeObj == 6000)
-                    {
-                        lines.Add(String.Format("{0}\t{1}", Math.Round(obj.X).ToString(), Math.Round(obj.Y).ToString()));
-                    }
-                    else if (typeObj >= 4500 && typeObj < 5000)
+
+                    if (typeObj >= 4500 && typeObj < 5000)
                     {
                         // Them 2 truong w, h =_=
                         //
@@ -120,24 +121,37 @@ namespace Tmx_Converter_Tool
                         double bottom = Math.Round(obj.Y + obj.Height);
 
 
-                        lines.Add(String.Format("{0}\t{1}\t{2}\t{3}\t{4}\t{5}", group.Name, obj.Name, left.ToString(), top.ToString(), right.ToString(), bottom.ToString()));
+                        linesObj.Add(String.Format("{0}\t{1}\t{2}\t{3}\t{4}\t{5}", group.Name, obj.Name, left.ToString(), top.ToString(), right.ToString(), bottom.ToString()));
                     }
                     else
                     {
                         //
                         // idTypeObj - idObj - x - y
                         //
-                        lines.Add(String.Format("{0}\t{1}\t{2}\t{3}\t{4}\t{5}", group.Name, obj.Name, Math.Round(obj.X).ToString(), Math.Round(obj.Y).ToString(), "0", "0"));
+                        linesObj.Add(String.Format("{0}\t{1}\t{2}\t{3}\t{4}\t{5}", group.Name, obj.Name, Math.Round(obj.X).ToString(), Math.Round(obj.Y).ToString(), "0", "0"));
                     }
                 }
             }
-            string pathFile;
-            saveFileDialog.Title = "Éc éc";
+
+            #endregion
+
+            string pathFileObj;
+            saveFileDialog.Title = "OBJ Éc éc";
             saveFileDialog.Filter = "Text files (*.txt)|*.txt";
             if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
-                pathFile = saveFileDialog.FileName;
-                System.IO.File.WriteAllLines(pathFile, lines);
+                pathFileObj = saveFileDialog.FileName;
+                System.IO.File.WriteAllLines(pathFileObj, linesObj);
+                MessageBox.Show("Done >.<", "Done >.<");
+            }
+
+            string pathFileTile;
+            saveFileDialog.Title = "TILE Éc éc";
+            saveFileDialog.Filter = "Text files (*.txt)|*.txt";
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                pathFileTile = saveFileDialog.FileName;
+                System.IO.File.WriteAllLines(pathFileTile, linesTile);
                 MessageBox.Show("Done >.<", "Done >.<");
             }
 
