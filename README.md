@@ -6,6 +6,8 @@ File txt sẽ dc format theo định dạng :
 
 - Dòng đầu tiên : `idTexture - mapW - mapH - tileW - tileH`
 
+- Dòng thứ 2 Pos của Aladin ( id == 6000 ): `posX- posY`
+
 - Những dòng tiếp theo là info các Obj trong map :
 
 - - Đối với các obj tĩnh `( id >= 4500 && < 5000 )` như land, pillar,.. :  `idTypeObj - idObj - left - top - right - bottom`
