@@ -79,17 +79,21 @@ namespace Tmx_Converter_Tool
 
             List<string> linesObj = new List<string>();
             List<string> linesTile = new List<string>();
+            List<string> linesMap = new List<string>();
 
             #region TILE txt 
             // Dong dau la idTexture
-            linesTile.Add(String.Format("{0}", idTexture.ToString()));
+
+            var tileSet = map.Tilesets.FirstOrDefault();
+
+            linesTile.Add(String.Format("{0}\t{1}", idTexture.ToString(), tileSet.TileCount));
 
             int idUnit = 1;
 
-            // Duyet
-            for (int y = 0; y < mapHeight; y += tileHeight)
+            // Duyet tung RECT 
+            for (int y = 0; y < tileSet.Image.Height; y += tileHeight)
             {
-                for (int x = 0; x < mapWidth; x += tileWidth)
+                for (int x = 0; x < tileSet.Image.Width; x += tileWidth)
                 {
                     // id 
                     linesTile.Add(String.Format("{0}\t{1}\t{2}\t{3}\t{4}", idUnit, x, y, x + tileWidth, y + tileHeight));
@@ -100,6 +104,20 @@ namespace Tmx_Converter_Tool
 
             #region OBJ txt
             var listObjectGroups = map.ObjectGroups;
+            int totalObject = 0;
+
+            // Dem so luong obj
+            foreach (var group in listObjectGroups)
+            {
+                foreach (var obj in group.Objects)
+                {
+                    totalObject += 1;
+                }
+
+            }
+
+            // Dong dau la so obj
+            linesObj.Add(String.Format("{0}", totalObject.ToString()));
 
             foreach (var group in listObjectGroups)
             {
@@ -135,6 +153,32 @@ namespace Tmx_Converter_Tool
 
             #endregion
 
+            #region MAP txt
+
+            var _tiles = map.Layers.FirstOrDefault().Tiles;
+
+            // Dong dau la thong tin map - numTileX - numTileY
+            linesMap.Add(String.Format("{0}\t{1}", map.Width, map.Height));
+
+            string row = "";
+
+            foreach (var tile in _tiles)
+            {
+
+                row += String.Format("\t{0}", tile.Gid);
+
+                if (tile.X == map.Width - 1)
+                {
+                    linesMap.Add(row.Trim());
+                    row = "";
+                }
+
+            }
+
+            #endregion
+
+            #region EXPORT TXT
+
             string pathFileObj;
             saveFileDialog.Title = "OBJ Éc éc";
             saveFileDialog.Filter = "Text files (*.txt)|*.txt";
@@ -154,6 +198,19 @@ namespace Tmx_Converter_Tool
                 System.IO.File.WriteAllLines(pathFileTile, linesTile);
                 MessageBox.Show("Done >.<", "Done >.<");
             }
+
+            string pathFileMap;
+            saveFileDialog.Title = "MAP Éc éc";
+            saveFileDialog.Filter = "Text files (*.txt)|*.txt";
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                pathFileMap = saveFileDialog.FileName;
+                System.IO.File.WriteAllLines(pathFileMap, linesMap);
+                MessageBox.Show("Done >.<", "Done >.<");
+            }
+
+
+            #endregion
 
         }
 
