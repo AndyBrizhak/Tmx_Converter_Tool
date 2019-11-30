@@ -8,7 +8,7 @@ namespace Tmx_Converter_Tool
 {
     public partial class Main : Form
     {
-        private string idTexture;
+        private string idTexture, idTextureAbove;
         private int mapWidth, mapHeight, tileWidth, tileHeight;
         private TmxMap map;
 
@@ -33,9 +33,15 @@ namespace Tmx_Converter_Tool
                     if (path.Length > 40) lblFileName.Text = "\\\\..." + path.Substring(path.Length - 40, 40);
                     else lblFileName.Text = path;
 
-                    // map chi co 1 tileset duy nhat nen ko duyet het tileset lam gi :)))
+                    // Mac dinh tileset cua map roi moi den tileset map above :)))
                     idTexture = map.Tilesets[0].Name;
                     lblMapTexture.Text = idTexture;
+
+                    if (map.Tilesets.Count() > 1)
+                    {
+                        idTextureAbove = map.Tilesets[1].Name;
+                        lblMapAboveTexture.Text = idTextureAbove;
+                    }
 
                     tileWidth = map.TileWidth;
                     tileHeight = map.TileHeight;
@@ -77,9 +83,23 @@ namespace Tmx_Converter_Tool
                 return;
             }
 
+            if (!CheckInfo())
+            {
+                MessageBox.Show(" --=== Nhập đủ info vào ===--", " -__- ");
+                return;
+            }
+
+            if (!CheckExport())
+            {
+                MessageBox.Show(" --=== CHECKKKKKK BOXXXXXX ===--", " -__- ");
+                return;
+            }
+
             List<string> linesObj = new List<string>();
             List<string> linesTile = new List<string>();
+            List<string> linesTileAbove = new List<string>();
             List<string> linesMap = new List<string>();
+            List<string> linesMapAbove = new List<string>();
 
             #region TILE txt 
             // Dong dau la idTexture
@@ -102,6 +122,29 @@ namespace Tmx_Converter_Tool
             }
             #endregion
 
+            #region TILE ABOVE txt 
+            // Dong dau la idTexture
+            if (map.Tilesets.Count > 1)
+            {
+                var tileSet_ = map.Tilesets[1];
+
+                linesTileAbove.Add(String.Format("{0}\t{1}", idTextureAbove.ToString(), tileSet_.TileCount));
+
+                int idUnit_ = 1;
+
+                // Duyet tung RECT 
+                for (int y = 0; y < tileSet_.Image.Height; y += tileHeight)
+                {
+                    for (int x = 0; x < tileSet_.Image.Width; x += tileWidth)
+                    {
+                        // id 
+                        linesTileAbove.Add(String.Format("{0}\t{1}\t{2}\t{3}\t{4}", idUnit_, x, y, x + tileWidth, y + tileHeight));
+                        idUnit_ += 1;
+                    }
+                }
+            }
+            #endregion
+
             #region OBJ txt
             var listObjectGroups = map.ObjectGroups;
             int totalObject = 0;
@@ -117,7 +160,7 @@ namespace Tmx_Converter_Tool
             }
 
             // Dong dau la so obj
-            linesObj.Add(String.Format("{0}", totalObject.ToString()));
+            linesObj.Add(String.Format("{0}\t{1}\t{2}", totalObject.ToString(), mapWidth.ToString(), mapHeight.ToString()));
 
             foreach (var group in listObjectGroups)
             {
@@ -126,8 +169,11 @@ namespace Tmx_Converter_Tool
                     // Kiem tra typeObj 
                     // Mac dinh typeObj >= 4500 && < 5000 
                     int typeObj = Convert.ToInt32(group.Name);
-
-                    if (typeObj >= 4500 && typeObj < 5000)
+                    if (typeObj == 6000)
+                    {
+                        linesObj.Add(String.Format("{0}\t{1}", Math.Round(obj.X).ToString(), Math.Round(obj.Y).ToString()));
+                    }
+                    else if (typeObj >= 4500 && typeObj < 5000)
                     {
                         // Them 2 truong w, h =_=
                         //
@@ -177,39 +223,69 @@ namespace Tmx_Converter_Tool
 
             #endregion
 
+            #region MAP ABOVE txt
+
+            var _tiles_above = map.Layers[1].Tiles;
+
+            // Dong dau la thong tin map - numTileX - numTileY
+            linesMapAbove.Add(String.Format("{0}\t{1}", map.Width, map.Height));
+
+            string row_ = "";
+
+            // Mac dinh tileset thu 2 la cua mapAbove
+            int fristIndex = map.Tilesets[1].FirstGid;
+
+            foreach (var tile in _tiles_above)
+            {
+
+                row_ += String.Format("\t{0}", tile.Gid - fristIndex);
+
+                if (tile.X == map.Width - 1)
+                {
+                    linesMapAbove.Add(row_.Trim());
+                    row_ = "";
+                }
+
+            }
+
+            #endregion
+
             #region EXPORT TXT
 
-            string pathFileObj;
-            saveFileDialog.Title = "OBJ Éc éc";
-            saveFileDialog.Filter = "Text files (*.txt)|*.txt";
-            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            if (ckbObj.Checked)
             {
-                pathFileObj = saveFileDialog.FileName;
+                string pathFileObj = txtPath.Text;
+                pathFileObj += "/obj.txt";
                 System.IO.File.WriteAllLines(pathFileObj, linesObj);
-                MessageBox.Show("Done >.<", "Done >.<");
             }
 
-            string pathFileTile;
-            saveFileDialog.Title = "TILE Éc éc";
-            saveFileDialog.Filter = "Text files (*.txt)|*.txt";
-            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            if (ckbMap.Checked)
             {
-                pathFileTile = saveFileDialog.FileName;
+
+                string pathFileTile = txtPath.Text;
+                pathFileTile += "/tile.txt";
                 System.IO.File.WriteAllLines(pathFileTile, linesTile);
-                MessageBox.Show("Done >.<", "Done >.<");
-            }
 
-            string pathFileMap;
-            saveFileDialog.Title = "MAP Éc éc";
-            saveFileDialog.Filter = "Text files (*.txt)|*.txt";
-            if (saveFileDialog.ShowDialog() == DialogResult.OK)
-            {
-                pathFileMap = saveFileDialog.FileName;
+                string pathFileMap = txtPath.Text;
+                pathFileMap += "/map.txt";
                 System.IO.File.WriteAllLines(pathFileMap, linesMap);
-                MessageBox.Show("Done >.<", "Done >.<");
+
             }
 
+            if (ckbMapAbove.Checked)
+            {
 
+                string pathFileTileAbove = txtPath.Text;
+                pathFileTileAbove += "/tile_above.txt";
+                System.IO.File.WriteAllLines(pathFileTileAbove, linesTileAbove);
+
+                string pathFileMapAbove = txtPath.Text;
+                pathFileMapAbove += "/map_above.txt";
+                System.IO.File.WriteAllLines(pathFileMapAbove, linesMapAbove);
+
+            }
+
+            MessageBox.Show("Done >.<", "Done >.<");
             #endregion
 
         }
@@ -236,5 +312,15 @@ namespace Tmx_Converter_Tool
 
         }
 
+        private bool CheckInfo()
+        {
+            string path = txtPath.Text.Trim();
+            return !(path == "");
+        }
+
+        private bool CheckExport()
+        {
+            return (ckbMap.Checked || ckbMapAbove.Checked || ckbObj.Checked);
+        }
     }
 }
